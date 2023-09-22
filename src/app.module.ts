@@ -9,6 +9,7 @@ import { TaskService } from './task/task.service';
 import { BullModule } from '@nestjs/bull';
 import { EmailProcessor } from './shared/email/email.processor';
 import { EmailQueue } from './shared/email/email.queue';
+// import { SeederService } from './core/seeds/users.seeder';
 
 
 @Module({
@@ -31,4 +32,5 @@ import { EmailQueue } from './shared/email/email.queue';
   ],
   providers: [EmailQueue, TaskService, EmailProcessor],
 })
+
 export class AppModule {}
