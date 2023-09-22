@@ -23,31 +23,44 @@ export class TaskService {
         let countCustomers = 0
 
         while (true) {
+            /* get customers from the database in batch */
             const customers = await this.userService.findByRole('customer', offset, batchSize)
 
+            /* check if there are records */
             if(customers.length === 0) {
                 break;
             }
 
+            /* loop customers records */
             for(const customer of customers) {
+
+                /* get individual customer recent purchase */
                 const customerRecentPurchase = await this.purchaseService.findCustomerLastPurchase(customer.id)[0]
-    
+
+                /* check if there is a match */
                 if(customerRecentPurchase.length === 0) {
                     break;
                 }
                 
+                /* prepare email payload to send via job */
                 const emailPayload: EmailJobData = {
                     to: customer.email,
                     subject: 'We want to hear from you',
                     text: `Kindly leave a feedback on your recently purchased policy ${customerRecentPurchase.policy.title}`,
                 }
 
+                /* queue email job */
                 await this.emailQueue.addEmailJob(emailPayload)
             }
 
+            /* increase offset for next cron */
             offset += batchSize
+
+            /* count processed customer batch */
             countCustomers++
         }
+
+        /* log feedback console */
         this.logger.debug(`Feedback script executed for ${countCustomers} customers.`);
     }
 }
