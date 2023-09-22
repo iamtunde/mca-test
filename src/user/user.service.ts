@@ -18,10 +18,12 @@ export class UserService {
         }
     }
 
-    async findByRole(role: string) {
+    async findByRole(role: string, offset: number, limit: number) {
         try {
             const users = await this.userRepository.findAll({
-                where: { role }
+                where: { role },
+                offset,
+                limit
             })
 
             return users

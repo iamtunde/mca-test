@@ -9,7 +9,7 @@ export class User extends Model<User>{
         defaultValue: DataType.UUIDV4,
         primaryKey: true,
     })
-    id?: string
+    id: string
 
     @Column({
         type: DataType.STRING,
@@ -51,6 +51,6 @@ export class User extends Model<User>{
     @UpdatedAt
     updatedAt: Date
 
-    @HasMany(() => Purchase)
+    @HasMany(() => Purchase, 'id')
     purchases: Purchase[]
 }

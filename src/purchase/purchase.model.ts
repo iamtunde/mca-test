@@ -1,10 +1,8 @@
-import { UUID } from "sequelize";
 import { Table, Column, DataType, Model, ForeignKey, CreatedAt, UpdatedAt, BelongsTo } from "sequelize-typescript";
 import { Policy } from "src/policies/policy.model";
 import { User } from "src/user/user.model";
 
 @Table
-
 export class Purchase extends Model<Purchase>{
     @Column({
         type: DataType.UUID,
@@ -13,35 +11,12 @@ export class Purchase extends Model<Purchase>{
     })
     id?: any
 
-   /*  @ForeignKey(() => User)
-    @Column({
-        type: DataType.UUID
-    })
-    userId: string */
     @ForeignKey(() => User)
-    @Column({
-        type: DataType.UUID
-    })
-    userId: string
+    userId: any
 
-    @BelongsTo(() => User, {
-        foreignKey: 'userId',
-        constraints: false
-    })
-    user: User
+    @ForeignKey(() => Policy)
+    policyId: any
 
-    /* @ForeignKey(() => Policy)
-    @Column({
-        type: DataType.UUID
-    })
-    policyId: string */
-
-   /*  @BelongsTo(() => Policy, {
-        foreignKey: 'policyId',
-        constraints: false 
-    })
-    policyId: Policy
- */
     @Column({
         type: DataType.STRING,
         allowNull: false
@@ -61,4 +36,10 @@ export class Purchase extends Model<Purchase>{
 
     @UpdatedAt
     updatedAt: Date
+
+    @BelongsTo(() => User)
+    user: User[]
+
+    @BelongsTo(() => Policy)
+    policy: Policy[]
 }

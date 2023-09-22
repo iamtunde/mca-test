@@ -1,18 +1,14 @@
-import { Table, Model, Column, DataType, HasMany, CreatedAt, UpdatedAt } from "sequelize-typescript";
+import { Table, Model, Column, DataType, CreatedAt, UpdatedAt, HasMany } from "sequelize-typescript";
 import { Purchase } from "src/purchase/purchase.model";
-
 @Table
 
 export class Policy extends Model<Policy>{
-    @HasMany(() => Purchase, 'policyId')
-    purchases: Purchase[]
-
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,
         primaryKey: true,
     })
-    id?: string
+    id: string
 
     @Column({
         type: DataType.STRING,
@@ -53,4 +49,7 @@ export class Policy extends Model<Policy>{
 
     @UpdatedAt
     updatedAt: Date
+
+    @HasMany(() => Purchase, 'id')
+    purchases: Purchase[]
 }

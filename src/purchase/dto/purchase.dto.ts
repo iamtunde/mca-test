@@ -3,5 +3,5 @@ export class PurchaseDto {
     policyId: string
     reference: string
     status: string
-    createdAt: string
+    createdAt: Date
 } 
