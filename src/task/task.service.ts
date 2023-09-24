@@ -19,7 +19,7 @@ export class TaskService {
     private readonly logger = new Logger(TaskService.name)
 
     /* run the schedule every 5 minutes */
-    @Cron(CronExpression.EVERY_10_SECONDS)
+    @Cron(CronExpression.EVERY_5_MINUTES)
     async handleCron() {
         const batchSize = QUERY_BATCH_SIZE
         let offset = 0
@@ -49,7 +49,7 @@ export class TaskService {
                     text: `Kindly leave a feedback on your recently purchased policy ${policy.name}`,
                 }
 
-                /* queue email job */
+                /* send email */
                 await this.emailProcessor.sendEmail(emailPayload)
             }
 
