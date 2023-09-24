@@ -5,18 +5,21 @@ import { PurchaseService } from 'src/purchase/purchase.service';
 import { QUERY_BATCH_SIZE } from 'src/core/constants';
 import { EmailQueue } from 'src/shared/email/email.queue';
 import { EmailJobData } from 'src/shared/email/email.interface';
+import { PolicyService } from 'src/policies/policy.service';
 
 @Injectable()
 export class TaskService {
     constructor(
         private readonly userService: UserService,
         private readonly purchaseService: PurchaseService,
+        private readonly policyService: PolicyService,
         private readonly emailQueue: EmailQueue
     ){}
 
     private readonly logger = new Logger(TaskService.name)
 
-    @Cron(CronExpression.EVERY_10_SECONDS)
+    /* run the schedule every 5 minutes */
+    @Cron(CronExpression.EVERY_5_MINUTES)
     async handleCron() {
         const batchSize = QUERY_BATCH_SIZE
         let offset = 0
@@ -36,17 +39,14 @@ export class TaskService {
 
                 /* get individual customer recent purchase */
                 const customerRecentPurchase = await this.purchaseService.findCustomerLastPurchase(customer.id)
-
-                /* check if there is a match */
-                if(!customerRecentPurchase) {
-                    break;
-                }
+                
+                const policy = await this.policyService.getOne(customerRecentPurchase.policyId)
                 
                 /* prepare email payload to send via job */
                 const emailPayload: EmailJobData = {
                     to: customer.email,
                     subject: 'We want to hear from you',
-                    text: `Kindly leave a feedback on your recently purchased policy ${customerRecentPurchase.policy.name}`,
+                    text: `Kindly leave a feedback on your recently purchased policy ${policy.name}`,
                 }
 
                 /* queue email job */

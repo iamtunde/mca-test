@@ -9,6 +9,8 @@ async function hashPassword(password) {
   }
 }
 
+const date = (new Date()).toISOString()
+
 module.exports = {
   async up (queryInterface, Sequelize) {
    await queryInterface.bulkInsert('users',
@@ -18,35 +20,45 @@ module.exports = {
           lastName: 'Yus',
           email: 'tuyus@gmail.com',
           password: await hashPassword('secret'),
-          role: 'customer'
+          role: 'customer',
+          createdAt: date,
+          updatedAt: date
       },
       {
           firstName: 'Olu',
           lastName: 'Ose',
           email: 'olose@gmail.com',
           password: await hashPassword('secret'),
-          role: 'provider'
+          role: 'provider',
+          createdAt: date,
+          updatedAt: date
       },
       {
           firstName: 'Ken',
           lastName: 'Jim',
           email: 'kejim@gmail.com',
           password: await hashPassword('secret'),
-          role: 'distributor'
+          role: 'distributor',
+          createdAt: date,
+          updatedAt: date
       },
       {
           firstName: 'Fre',
           lastName: 'Ebh',
           email: 'freb@gmail.com',
           password: await hashPassword('secret'),
-          role: 'admin'
+          role: 'admin',
+          createdAt: date,
+          updatedAt: date
       },
       {
           firstName: 'Chu',
           lastName: 'Efa',
           email: 'chef@gmail.com',
           password: await hashPassword('secret'),
-          role: 'customer'
+          role: 'customer',
+          createdAt: date,
+          updatedAt: date
       },
     ])
   },

@@ -2,6 +2,7 @@
 const generateRandomString = () => {
   return Math.floor(Math.random() * Date.now()).toString(36);
 };
+const date = (new Date()).toISOString()
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -12,31 +13,41 @@ module.exports = {
         userId: 3,
         policyId: 2,
         reference: generateRandomString(),
-        status: 'successful'
+        status: 'successful',
+        createdAt: date,
+        updatedAt: date
       },
       {
         userId: 3,
         policyId: 4,
         reference: generateRandomString(),
-        status: 'successful'
+        status: 'successful',
+        createdAt: date,
+        updatedAt: date
       },
       {
         userId: 3,
         policyId: 1,
         reference: generateRandomString(),
-        status: 'successful'
+        status: 'successful',
+        createdAt: date,
+        updatedAt: date
       },
       {
         userId: 7,
         policyId: 4,
         reference: generateRandomString(),
-        status: 'successful'
+        status: 'successful',
+        createdAt: date,
+        updatedAt: date
       },
       {
         userId: 7,
         policyId: 1,
         reference: generateRandomString(),
-        status: 'successful'
+        status: 'successful',
+        createdAt: date,
+        updatedAt: date
       },
     ])
   },

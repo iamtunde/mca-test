@@ -17,4 +17,18 @@ export class PolicyService {
             throw new DatabaseError(error)
         }
     }
+
+    async getOne(policyId: number) {
+        try {
+            const policy = await this.policyRepository.findOne<Policy>({
+                where: {
+                    id: policyId
+                }
+            })
+
+            return policy
+        } catch(error) {
+            throw new DatabaseError(error)
+        }
+    }
 }
