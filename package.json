@@ -18,8 +18,21 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "seed:users": "nest run src/core/seeds/users.seed.ts",
-    "seed:policies": "nest run src/core/seeds/policies.seed.ts"
+    "make:seed": "node_modules/.bin/sequelize seed:create --name $NAME",
+    "db:seed": "node_modules/.bin/sequelize db:seed --seed $NAME",
+    "db:seed:all": "node_modules/.bin/sequelize db:seed:all",
+    "db:seed:rollback": "node_modules/.bin/sequelize db:seed:undo:all",
+    "db:seed:rollbake:one": "node_modules/.bin/sequelize db:seed:undo --seed $NAME",
+    "db:seed:rollback:all": "node_modules/.bin/sequelize db:seed:undo:all",
+    "make:migration": "node_modules/.bin/sequelize migration:create --name $NAME",
+    "db:migrate": "node_modules/.bin/sequelize db:migrate",
+    "db:migrate:one": "node_modules/.bin/sequelize db:migrate --name $NAME",
+    "db:migrate:rollback": "node_modules/.bin/sequelize db:migrate:undo",
+    "db:migrate:rollback:one": "node_modules/.bin/sequelize db:migrate:undo --name $NAME",
+    "db:migrate:rollback:all": "node_modules/.bin/sequelize db:migrate:undo:all",
+    "db:migrate:rollback:to": "node_modules/.bin/sequelize db:migrate:undo --to --name $NAME",
+    "db:migrate:status": "node_modules/.bin/sequelize db:migrate:status",
+    "make:model": "node_modules/.bin/sequelize model:generate --name $NAME"
   },
   "dependencies": {
     "@nestjs/bull": "^10.0.1",
@@ -40,6 +53,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "sequelize": "^6.33.0",
+    "sequelize-cli": "^6.6.1",
     "sequelize-typescript": "^2.1.5",
     "yargs": "^17.7.2"
   },

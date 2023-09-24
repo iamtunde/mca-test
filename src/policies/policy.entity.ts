@@ -1,14 +1,14 @@
 import { Table, Model, Column, DataType, CreatedAt, UpdatedAt, HasMany } from "sequelize-typescript";
-import { Purchase } from "src/purchase/purchase.model";
-@Table
+import { Purchase } from "src/purchase/purchase.entity";
+@Table({ tableName: 'policies' })
 
 export class Policy extends Model<Policy>{
     @Column({
-        type: DataType.UUID,
-        defaultValue: DataType.UUIDV4,
+        type: DataType.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
     })
-    id: string
+    id: number
 
     @Column({
         type: DataType.STRING,
@@ -23,7 +23,7 @@ export class Policy extends Model<Policy>{
     description: string
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.TEXT,
         unique: true,
         allowNull: false
     })
@@ -50,6 +50,6 @@ export class Policy extends Model<Policy>{
     @UpdatedAt
     updatedAt: Date
 
-    @HasMany(() => Purchase, 'id')
+    @HasMany(() => Purchase, 'policyId')
     purchases: Purchase[]
 }

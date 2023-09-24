@@ -1,15 +1,15 @@
 import { Table, Column, DataType, Model, ForeignKey, CreatedAt, UpdatedAt, BelongsTo } from "sequelize-typescript";
-import { Policy } from "src/policies/policy.model";
-import { User } from "src/user/user.model";
+import { Policy } from "src/policies/policy.entity";
+import { User } from "src/user/user.entity";
 
-@Table
+@Table({ tableName: 'purchases' })
 export class Purchase extends Model<Purchase>{
     @Column({
-        type: DataType.UUID,
-        defaultValue: DataType.UUIDV4,
-        primaryKey: true
+        type: DataType.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
     })
-    id?: any
+    id: number
 
     @ForeignKey(() => User)
     userId: any
@@ -25,9 +25,9 @@ export class Purchase extends Model<Purchase>{
 
     @Column({
         type: DataType.ENUM,
-        values: ['successful', 'failed'],
+        values: ['failed', 'pending', 'successful'],
         allowNull: false,
-        defaultValue: 'successful'
+        defaultValue: 'pending'
     })
     status: string
 
@@ -37,9 +37,9 @@ export class Purchase extends Model<Purchase>{
     @UpdatedAt
     updatedAt: Date
 
-    @BelongsTo(() => User)
-    user: User[]
+    @BelongsTo(() => User, 'userId')
+    user: User
 
-    @BelongsTo(() => Policy)
-    policy: Policy[]
+    @BelongsTo(() => Policy, 'policyId')
+    policy: Policy
 }

@@ -3,12 +3,12 @@ services:
   mycoverai-db:
     image: postgres:13
     ports:
-      - 5434:5432
+      - 5432:5432
     environment:
       POSTGRES_USER: sensei
       POSTGRES_PASSWORD: sudo123
       POSTGRES_DB: mycoverai
-      POSTGRES_HOST: "0.0.0.0"
+      POSTGRES_HOST: "127.0.0.1"
     networks:
       - mca_network
 networks:

@@ -1,6 +1,6 @@
 export class PurchaseDto {
-    userId: string
-    policyId: string
+    userId: number
+    policyId: number
     reference: string
     status: string
     createdAt: Date

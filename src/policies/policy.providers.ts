@@ -1,4 +1,4 @@
-import { Policy } from "./policy.model";
+import { Policy } from "./policy.entity";
 import { POLICY_REPOSITORY } from "src/core/constants";
 
 export const policyProviders = [{

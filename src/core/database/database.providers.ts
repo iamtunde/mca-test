@@ -1,9 +1,9 @@
 import { Sequelize } from "sequelize-typescript";
 import { SEQUELIZE, DEVELOPMENT, TEST, PRODUCTION } from "../constants";
 import { databaseConfig } from "./database.config";
-import { User } from "src/user/user.model";
-import { Policy } from "src/policies/policy.model";
-import { Purchase } from "src/purchase/purchase.model";
+import { User } from "src/user/user.entity";
+import { Policy } from "src/policies/policy.entity";
+import { Purchase } from "src/purchase/purchase.entity";
 
 export const databaseProviders = [{
     provide: SEQUELIZE,

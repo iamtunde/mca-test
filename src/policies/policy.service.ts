@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { POLICY_REPOSITORY } from 'src/core/constants';
 import { PolicyDto } from './dto';
-import { Policy } from './policy.model';
+import { Policy } from './policy.entity';
 import { DatabaseError } from 'sequelize';
 
 @Injectable()

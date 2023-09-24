@@ -1,6 +1,6 @@
 import { DatabaseError } from 'sequelize';
 import { UserDto } from './dto';
-import { User } from './user.model';
+import { User } from './user.entity';
 import { Injectable, Inject } from '@nestjs/common';
 import { USER_REPOSITORY } from 'src/core/constants';
 
@@ -20,7 +20,7 @@ export class UserService {
 
     async findByRole(role: string, offset: number, limit: number) {
         try {
-            const users = await this.userRepository.findAll({
+            const users = await this.userRepository.findAll<User>({
                 where: { role },
                 offset,
                 limit

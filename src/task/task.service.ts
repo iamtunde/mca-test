@@ -16,7 +16,7 @@ export class TaskService {
 
     private readonly logger = new Logger(TaskService.name)
 
-    @Cron(CronExpression.EVERY_5_MINUTES)
+    @Cron(CronExpression.EVERY_10_SECONDS)
     async handleCron() {
         const batchSize = QUERY_BATCH_SIZE
         let offset = 0
@@ -35,10 +35,10 @@ export class TaskService {
             for(const customer of customers) {
 
                 /* get individual customer recent purchase */
-                const customerRecentPurchase = await this.purchaseService.findCustomerLastPurchase(customer.id)[0]
+                const customerRecentPurchase = await this.purchaseService.findCustomerLastPurchase(customer.id)
 
                 /* check if there is a match */
-                if(customerRecentPurchase.length === 0) {
+                if(!customerRecentPurchase) {
                     break;
                 }
                 
@@ -46,7 +46,7 @@ export class TaskService {
                 const emailPayload: EmailJobData = {
                     to: customer.email,
                     subject: 'We want to hear from you',
-                    text: `Kindly leave a feedback on your recently purchased policy ${customerRecentPurchase.policy.title}`,
+                    text: `Kindly leave a feedback on your recently purchased policy ${customerRecentPurchase.policy.name}`,
                 }
 
                 /* queue email job */

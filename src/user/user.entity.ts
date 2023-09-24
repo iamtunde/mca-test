@@ -1,15 +1,15 @@
 import { Table, Model, Column, DataType, HasMany, CreatedAt, UpdatedAt } from "sequelize-typescript";
-import { Purchase } from "src/purchase/purchase.model";
+import { Purchase } from "src/purchase/purchase.entity";
 
-@Table
+@Table({ tableName: 'users' })
 
 export class User extends Model<User>{
     @Column({
-        type: DataType.UUID,
-        defaultValue: DataType.UUIDV4,
+        type: DataType.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
     })
-    id: string
+    id: number
 
     @Column({
         type: DataType.STRING,
