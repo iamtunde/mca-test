@@ -3,9 +3,9 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { UserService } from 'src/user/user.service';
 import { PurchaseService } from 'src/purchase/purchase.service';
 import { QUERY_BATCH_SIZE } from 'src/core/constants';
-import { EmailQueue } from 'src/shared/email/email.queue';
 import { EmailJobData } from 'src/shared/email/email.interface';
 import { PolicyService } from 'src/policies/policy.service';
+import { EmailProcessor } from 'src/shared/email/email.processor';
 
 @Injectable()
 export class TaskService {
@@ -13,13 +13,13 @@ export class TaskService {
         private readonly userService: UserService,
         private readonly purchaseService: PurchaseService,
         private readonly policyService: PolicyService,
-        private readonly emailQueue: EmailQueue
+        private readonly emailProcessor: EmailProcessor
     ){}
 
     private readonly logger = new Logger(TaskService.name)
 
     /* run the schedule every 5 minutes */
-    @Cron(CronExpression.EVERY_5_MINUTES)
+    @Cron(CronExpression.EVERY_10_SECONDS)
     async handleCron() {
         const batchSize = QUERY_BATCH_SIZE
         let offset = 0
@@ -50,7 +50,7 @@ export class TaskService {
                 }
 
                 /* queue email job */
-                await this.emailQueue.addEmailJob(emailPayload)
+                await this.emailProcessor.sendEmail(emailPayload)
             }
 
             /* increase offset for next cron */

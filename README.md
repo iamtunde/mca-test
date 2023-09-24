@@ -14,14 +14,14 @@ The program fetch user records and send an email notification requesting feedbac
 - Postgres
 
 ### Dependencies
-- Mailtrap
-
+- [Mailtrap](https://mailtrap.io/)
 ## Installation & Setup
 
 ```bash
 # create .env file from example file
 $ cp .env.example .env
 ```
+<p>Create an account on Mailtrap and supply your API 'user' and 'pass' credentials in the .env file<p>
 
 <p>Modify the .env file with your smtp mail configuration</p>
 
