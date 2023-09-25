@@ -8,7 +8,6 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { TaskService } from './task/task.service';
 import { BullModule } from '@nestjs/bull';
 import { EmailProcessor } from './shared/email/email.processor';
-import { EmailQueue } from './shared/email/email.queue';
 
 
 @Module({
@@ -29,7 +28,7 @@ import { EmailQueue } from './shared/email/email.queue';
     PolicyModule,
     PurchaseModule,
   ],
-  providers: [EmailQueue, TaskService, EmailProcessor],
+  providers: [TaskService, EmailProcessor],
 })
 
 export class AppModule {}

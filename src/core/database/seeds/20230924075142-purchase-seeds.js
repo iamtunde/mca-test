@@ -10,7 +10,7 @@ module.exports = {
     await queryInterface.bulkInsert('purchases', 
     [
       {
-        userId: 3,
+        userId: 1,
         policyId: 2,
         reference: generateRandomString(),
         status: 'successful',
@@ -18,7 +18,7 @@ module.exports = {
         updatedAt: date
       },
       {
-        userId: 3,
+        userId: 1,
         policyId: 4,
         reference: generateRandomString(),
         status: 'successful',
@@ -26,7 +26,7 @@ module.exports = {
         updatedAt: date
       },
       {
-        userId: 3,
+        userId: 1,
         policyId: 1,
         reference: generateRandomString(),
         status: 'successful',
@@ -34,7 +34,7 @@ module.exports = {
         updatedAt: date
       },
       {
-        userId: 7,
+        userId: 5,
         policyId: 4,
         reference: generateRandomString(),
         status: 'successful',
@@ -42,7 +42,7 @@ module.exports = {
         updatedAt: date
       },
       {
-        userId: 7,
+        userId: 5,
         policyId: 1,
         reference: generateRandomString(),
         status: 'successful',

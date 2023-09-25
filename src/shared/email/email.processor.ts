@@ -1,8 +1,7 @@
-import { Processor, Process } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { emailConfig } from './email.config';
-import { EmailJobData } from './email.interface';
+import { IEmailPayload } from './email.interface';
 
 @Injectable()
 
@@ -12,7 +11,7 @@ export class EmailProcessor {
         this.transporter = nodemailer.createTransport(emailConfig)
     }
     
-    async sendEmail(emailData: EmailJobData) {
+    async sendEmail(emailData: IEmailPayload) {
         const mailOptions = {
             from: `"Support Team"<${process.env.MAIL_FROM}>`,
             to: emailData.to,

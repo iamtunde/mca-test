@@ -28,23 +28,29 @@ $ cp .env.example .env
 ```bash
 $ npm install
 ```
-
-```bash
-# run migrations on the database
-$ npm run db:migrate
-```
-
-```bash
-# run database seed data
-$ npm run db:seed:all
-```
 ## Docker Setup
 ```bash
 # build the docker image
-$ docker compose build
+$ docker compose build [$NAME]
+```
+
+## Database & Setup
+```bash
+# build the database docker image
+$ docker compose build -d mycoverai-db
+
+# start the database docker service
+$ docker compose up -d mycoverai-db
+```
+## Migrations & Seeds
+```bash
+# run migrations on the database
+$ npm run db:migrate
+
+# run database seed data
+$ npm run db:seed:all
 ```
 ## Running the app
-
 ```bash
 # development
 $ npm run start
@@ -52,17 +58,12 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
-
 # run in docker
-$ docker compose up -d
+$ docker compose up -d [$NAME]
 ```
 
 ## Stay in touch
-
 - Author - [Túndé Yusuf](https://github.com/iamtunde)
 
 ## License
-
 Nest is [MIT licensed](LICENSE).
