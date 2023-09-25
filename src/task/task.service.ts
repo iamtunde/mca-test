@@ -3,7 +3,7 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { UserService } from 'src/user/user.service';
 import { PurchaseService } from 'src/purchase/purchase.service';
 import { QUERY_BATCH_SIZE } from 'src/core/constants';
-import { EmailJobData } from 'src/shared/email/email.interface';
+import { IEmailPayload } from 'src/shared/email/email.interface';
 import { PolicyService } from 'src/policies/policy.service';
 import { EmailProcessor } from 'src/shared/email/email.processor';
 
@@ -43,7 +43,7 @@ export class TaskService {
                 const policy = await this.policyService.getOne(customerRecentPurchase.policyId)
                 
                 /* prepare email payload to send via job */
-                const emailPayload: EmailJobData = {
+                const emailPayload: IEmailPayload = {
                     to: customer.email,
                     subject: 'We want to hear from you',
                     text: `Kindly leave a feedback on your recently purchased policy ${policy.name}`,

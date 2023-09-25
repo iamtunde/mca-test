@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Define the command to run your application
-CMD "npm run start:dev"
+CMD ["npm", "start"]
